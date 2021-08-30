@@ -1,45 +1,24 @@
+import { CalculadoraController } from "./controllers/CalculadoraController"
+
+const calculadoraController = new CalculadoraController()
 const express = require('express')
-const app = express ()
+const app = express()
 
 app.use(express.json())
 
-app.get("/", function(req, res) {
-    res.send("primeira chamada")
-})
 
-app.get("/teste", function(req, res) {
-    res.send("chamando api chamada TESTE - segunda aula...")
-})
 
-app.get("/teste/:username", function(req, res) {
-    const { username } = req.params
-    
-    res.send({
-        "message": "testando método GET com passagem de parâmetros",
-        "username": username
-    })
+app.get("/calc/somar/:param1/:param2", calculadoraController.somar)
 
-   //res.status(500).json({ error: 'username not found'})
+app.get("/calc/subtrair/:param1/:param2", calculadoraController.subtrair)
 
-})
+app.get("/calc/multiplicar/:param1/:param2", calculadoraController.multiplicar)
 
-app.post("/teste", function(req, res){
-  //  res.send({
-  //      "message": "testando metodo POST"
-  //  })
+app.get("/calc/dividir/:param1/:param2", calculadoraController.dividir)
 
-    const { nome, sobrenome} = req.body
+app.get("/calc/potencia/:param1/:param2", calculadoraController.potencia)
 
-    if (nome == undefined || sobrenome == undefined) {
-        res.status(500).json({ error: 'Bad Request'})
-    }
+app.get("/calc/raizQuadrada/:param1", calculadoraController.raizQuadrada)
 
-    res.send({
-        "message": "testando método POST",
-        "nome": nome,
-        "sobrenome": sobrenome
-    })
 
-})
-
-app.listen(3333, () => console.log("Servidor rodando na porta 3333"))
+app.listen(3333, () => console.log("Servidor executando na porta 3333"))
