@@ -1,6 +1,8 @@
 import { CalculadoraController } from "./controllers/CalculadoraController"
+import { PisController } from "./controllers/PisController"
 
 const calculadoraController = new CalculadoraController()
+const pisController = new PisController()
 const express = require('express')
 const app = express()
 
@@ -20,5 +22,8 @@ app.post("/somar-varios", calculadoraController.somarVarios)
 app.post("/subtrair-varios", calculadoraController.subtrairVarios)
 app.post("/multiplicar-varios", calculadoraController.multiplicarVarios)
 app.post("/dividir-varios", calculadoraController.dividirVarios)
+
+// IMPOSTO PIS TESTE
+app.post("/pis/calcular",pisController.calcular)
 
 app.listen(3333, () => console.log("Servidor executando na porta 3333"))
