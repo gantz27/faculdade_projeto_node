@@ -2,9 +2,9 @@
 
 class PisService {
 
-    async calcularPis(timeWorking: number) {
-        if (timeWorking >= 1 && timeWorking <= 12) {
-            return timeWorking * 92
+    async calcularPis(timeWorked: number) {
+        if (timeWorked >= 1 && timeWorked <= 12) {
+            return timeWorked * 92
         }
 
     }

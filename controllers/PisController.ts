@@ -5,11 +5,11 @@ class PisController {
 
     async calcular(req, res) {
 
-        const { timeWorking } = req.body
+        const { timeWorked } = req.body
 
         const pisService = new PisService
 
-        const resultado = await pisService.calcularPis(timeWorking)
+        const resultado = await pisService.calcularPis(timeWorked)
 
         return res.send({ resultado })
 
