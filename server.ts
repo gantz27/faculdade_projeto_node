@@ -1,8 +1,11 @@
 import { CalculadoraController } from "./controllers/CalculadoraController"
 import { PisController } from "./controllers/PisController"
+import { IrNaFonteController } from "./controllers/IrNaFonteController"
 
 const calculadoraController = new CalculadoraController()
 const pisController = new PisController()
+const irnafonteController = new IrNaFonteController()
+
 const express = require('express')
 const app = express()
 
@@ -25,5 +28,8 @@ app.post("/dividir-varios", calculadoraController.dividirVarios)
 
 // IMPOSTO PIS TESTE
 app.post("/pis/calcular",pisController.calcular)
+
+// CALCULAR IR NA FONTE TESTE V1.0
+app.post("/irfonte/calcularIrNaFonte",irnafonteController.calcularIrFonte)
 
 app.listen(3333, () => console.log("Servidor executando na porta 3333"))
