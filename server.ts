@@ -30,6 +30,6 @@ app.post("/dividir-varios", calculadoraController.dividirVarios)
 app.post("/pis/calcular",pisController.calcular)
 
 // CALCULAR IR NA FONTE TESTE V1.0
-app.post("/irfonte/calcularIrNaFonte",irnafonteController.calcularIrFonte)
+app.post("/irfonte/calcularirnafonte",irnafonteController.calcularIrFonte)
 
 app.listen(3333, () => console.log("Servidor executando na porta 3333"))
