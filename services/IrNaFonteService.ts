@@ -23,16 +23,16 @@ class IrNaFonteService {
                 return (baseSalarial * 0)
                 break;
             case faixaSalarial = 1:
-                return (baseSalarial*0.075) - 142.80
+                return Number((baseSalarial*0.075) - 142.80).toFixed(2)
                 break;
             case faixaSalarial = 2:
-                return (baseSalarial*0.15) - 354.80
+                return Number((baseSalarial*0.15) - 354.80).toFixed(2)
                 break;
             case faixaSalarial = 3:
-                return (baseSalarial*0.225) - 636.13
+                return Number((baseSalarial*0.225) - 636.13).toFixed(2)
                 break;
             case faixaSalarial = 4:
-                return (baseSalarial*0.275) - 869.36
+                return Number((baseSalarial*0.275) - 869.36).toFixed(2)
 
             default:
                 console.log("Sorry, we are out of ${faixaSalarial}.");
