@@ -1,14 +1,14 @@
-
+import { isNumber } from "util";
 
 class PisService {
-
-    async calcularPis(monthsWorked: number) {
-        if (monthsWorked >= 1 && monthsWorked <= 12) {
-            return monthsWorked * 92
-        }
-
+  async calcularPis(monthsWorked: number) {
+    if (monthsWorked > 12 || monthsWorked < 0 || isNaN) {
+      throw Error;
     }
-
+    if (monthsWorked >= 1 && monthsWorked <= 12) {
+      return monthsWorked * 92;
+    }
+  }
 }
 
-export { PisService }
+export { PisService };
