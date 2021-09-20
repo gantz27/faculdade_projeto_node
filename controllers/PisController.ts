@@ -9,7 +9,7 @@ class PisController {
       const resultado = await pisService.calcularPis(monthsWorked);
       return res.send({ resultado });
     } catch (e) {
-      res.json({ error: "Escreva o número do mês válido (1 - 12)" });
+      res.status(400).json({ error: "Escreva o número do mês válido (1 - 12)" });
     }
   }
 }
