@@ -2,54 +2,44 @@
 
 class IrNaFonteService {
 
-    async calcularIrNaFonte(salBruto: number, inss: number, pensaoAlimenticia: number, dependentes: number) {
+    async calcularIrNaFonte(salBruto: number, pensaoAlimenticia: number, dependentes: number) {
 
-        function calculoInss($salarioBruto) {
-            $valor = 0;
-            $calculated = false;
+        function calculoInss(salBruto) {
+            let valor = 0
+            let calculated = false
 
-            //    primeira faixa
-            if ($salarioBruto <= 1100) {
-                $valor += $salarioBruto * 0.075;
-                $calculated = true;
-            } else if (!$calculated) {
-                $valor = 1100 * 0.075;
+            if (salBruto <= 1100) {
+                valor += salBruto * 0.075
+                calculated = true
+            } else if (!calculated) {
+                valor = 1100 * 0.075
             }
 
-            //    segunda faixa
-            if ($salarioBruto <= 2203.48 && !$calculated) {
-                $valor += ($salarioBruto - 1100.01) * 0.09;
-                $calculated = true;
-            } else if (!$calculated) {
-                $valor += (2203.48 - 1100.01) * 0.09;
+            if (salBruto <= 2203.48 && !calculated) {
+                valor += (salBruto - 1100.01) * 0.09;
+                calculated = true;
+            } else if (!calculated) {
+                valor += (2203.48 - 1100.01) * 0.09;
             }
 
-            //terceira faixa
-            if ($salarioBruto <= 3305.22 && !$calculated) {
-                $valor += ($salarioBruto - 2203.49) * 0.12;
-                $calculated = true;
-            } else if (!$calculated) {
-                $valor += (3305.22 - 2203.49) * 0.12;
+            if (salBruto <= 3305.22 && !calculated) {
+                valor += (salBruto - 2203.49) * 0.12;
+                calculated = true;
+            } else if (!calculated) {
+                valor += (3305.22 - 2203.49) * 0.12;
             }
 
-            //quarta faixa
-            if ($salarioBruto <= 6433.57 && !$calculated) {
-                $valor += ($salarioBruto - 3305.23) * 0.14;
-                $calculated = true;
-            } else if (!$calculated) {
-                $valor += (6433.57 - 3305.23) * 0.14;
+            if (salBruto <= 6433.57 && !calculated) {
+                valor += (salBruto - 3305.23) * 0.14;
+                calculated = true;
+            } else if (!calculated) {
+                valor += (6433.57 - 3305.23) * 0.14;
             }
-
-
-
-
-            return $valor;
+            return valor;
         }
 
 
-
-
-
+        const inss = calculoInss(salBruto)
         const baseSalarial = salBruto - inss - pensaoAlimenticia - (dependentes * 189.59)
         let faixaSalarial = 0
 
