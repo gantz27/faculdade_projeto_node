@@ -3,7 +3,6 @@
 class IrNaFonteService {
 
     async calcularIrNaFonte(salBruto: number, pensaoAlimenticia: number, dependentes: number) {
-
         function calculoInss(salBruto) {
             let valor = 0
             let calculated = false
