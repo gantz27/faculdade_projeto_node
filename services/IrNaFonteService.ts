@@ -3,11 +3,11 @@ import { isString } from "util";
 class IrNaFonteService {
   async calcularIrNaFonte(salBruto: number, pensaoAlimenticia: number, dependentes: number) {
     console.log(typeof dependentes);
-    
-    if (salBruto <= 0 || pensaoAlimenticia < 0 || dependentes < 0 || isNaN(salBruto) || isNaN(pensaoAlimenticia) ||
-        isNaN(dependentes) || isString(dependentes) || isString(salBruto) || isString(pensaoAlimenticia)) {
 
-        throw Error;
+    if (salBruto <= 0 || pensaoAlimenticia < 0 || dependentes < 0 || isNaN(salBruto) || isNaN(pensaoAlimenticia) ||
+      isNaN(dependentes) || isString(dependentes) || isString(salBruto) || isString(pensaoAlimenticia)) {
+
+      throw Error;
     }
 
     function calculoInss(salBruto) {
