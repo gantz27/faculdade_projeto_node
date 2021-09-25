@@ -10,7 +10,9 @@ async calcularIrAnual(req, res){
 
     const resultado = await iranualService.calcularIrAnual(salBrutoAnual, irRetido, inss, dependentes)
 
-    return res.send({ resultado })
+    const aliquota = await iranualService.mostrarAliquota(resultado)
+
+    return res.send({ resultado, aliquota })
 }
 
 }
