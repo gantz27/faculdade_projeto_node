@@ -1,11 +1,11 @@
 
-
 class IrAnualService {
     async calcularIrAnual(salBrutoAnual: number, irRetido: number, inss: number, dependentes: number) {
-
+        
+        let faixaSalarial = 0
         const baseCalculo = salBrutoAnual - irRetido - inss - (dependentes * 189.59);
-        let faixaSalarial = 0;
-        //let alq
+
+
 
         if (baseCalculo <= 22847.76) {
             faixaSalarial = 0;
@@ -57,16 +57,17 @@ class IrAnualService {
     }
 
     async mostrarAliquota(faixaSalarial) {
-        let alq 
-        if (faixaSalarial = 0){
+        console.log(faixaSalarial)
+        let alq
+        if (faixaSalarial == 0){
             return alq = "isento"
-        } else if (faixaSalarial = 1) {
+        } else if (faixaSalarial == 1 ) {
             return alq = "7.5%"
-        } else if (faixaSalarial = 2) {
+        } else if (faixaSalarial == 2) {
             return alq = "15%"
-        } else if (faixaSalarial = 3) {
+        } else if (faixaSalarial == 3) {
             return alq = "22.5%"
-        }else if (faixaSalarial = 4) {
+        }else if (faixaSalarial == 4) {
             return alq = "27.5%"
         }
     }
