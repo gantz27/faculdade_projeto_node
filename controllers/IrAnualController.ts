@@ -8,10 +8,11 @@ async calcularIrAnual(req, res){
 
     const iranualService = new IrAnualService
 
-    const resultado = await iranualService.calcularIrAnual(salBrutoAnual, irRetido, inss, dependentes)
+    const receberValor = await iranualService.calcularIrAnual(salBrutoAnual, irRetido, inss, dependentes)
 
-    const aliquota = await iranualService.mostrarAliquota(resultado)
-
+    const aliquota = receberValor[1]
+    const resultado = receberValor[0]
+    
     return res.send({ resultado, aliquota })
 }
 
