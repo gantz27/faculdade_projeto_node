@@ -13,7 +13,7 @@ class IrAnualService {
         }
 
         
-        const baseCalculo = salBrutoAnual - irRetido - inss - (dependentes * 189.59);
+        const baseCalculo = salBrutoAnual - irRetido - inss - ((dependentes * 189.59)*12);
         var faixaSalarial = 0
 
                
@@ -51,16 +51,16 @@ class IrAnualService {
                 return [Number(baseCalculo * 0), aliquota()];
                 break;
             case (faixaSalarial = 1):
-                return [Number(baseCalculo * 0.075 - 142.8).toFixed(2), aliquota()];
+                return [Number(baseCalculo * 0.075 - 1713.58).toFixed(2), aliquota()];
                 break;
             case (faixaSalarial = 2):
-                return [Number(baseCalculo * 0.15 - 354.8).toFixed(2), aliquota()];
+                return [Number(baseCalculo * 0.15 - 4257.57).toFixed(2), aliquota()];
                 break;
             case (faixaSalarial = 3):
-                return [Number(baseCalculo * 0.225 - 636.13).toFixed(2), aliquota()];
+                return [Number(baseCalculo * 0.225 - 7633.51).toFixed(2), aliquota()];
                 break;
             case (faixaSalarial = 4):
-                return [Number(baseCalculo * 0.275 - 869.36).toFixed(2), aliquota()];
+                return [Number(baseCalculo * 0.275 - 10432.32).toFixed(2), aliquota()];
             default:
                 console.log("Sorry, we are out of ${faixaSalarial}.");
         }
