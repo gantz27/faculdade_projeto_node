@@ -1,11 +1,11 @@
-import { isString } from "util";
+import { isBoolean } from "util";
 
 class IrNaFonteService {
   async calcularIrNaFonte(salBruto: number, pensaoAlimenticia: number, dependentes: number) {
     console.log(typeof dependentes);
 
     if (salBruto <= 0 || pensaoAlimenticia < 0 || dependentes < 0 || isNaN(salBruto) || isNaN(pensaoAlimenticia) ||
-      isNaN(dependentes) || isString(dependentes) || isString(salBruto) || isString(pensaoAlimenticia)) {
+      isNaN(dependentes) || isBoolean(dependentes) || isBoolean(salBruto) || isBoolean(pensaoAlimenticia)) {
 
       throw Error;
     }
