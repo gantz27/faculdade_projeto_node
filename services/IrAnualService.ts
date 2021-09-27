@@ -1,7 +1,17 @@
+import { isBoolean, isString } from "util";
 
 class IrAnualService {
 
     async calcularIrAnual(salBrutoAnual: number, irRetido: number, inss: number, dependentes: number) {
+
+        if(salBrutoAnual <= 0 || isNaN(salBrutoAnual) || isBoolean(salBrutoAnual)
+            || irRetido <= 0 || isNaN(irRetido) || isBoolean(irRetido)
+            || inss <= 0 || isNaN(inss) || isBoolean(inss)
+            || dependentes < 0 || isNaN(dependentes) || isBoolean(dependentes))
+        {
+            throw Error
+        }
+
         
         const baseCalculo = salBrutoAnual - irRetido - inss - (dependentes * 189.59);
         var faixaSalarial = 0
