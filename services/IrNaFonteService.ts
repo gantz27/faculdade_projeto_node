@@ -1,42 +1,43 @@
 import { isBoolean } from "util";
+import { IrFonteModel } from "../models/IrFonte";
 
 class IrNaFonteService {
-  async calcularIrNaFonte(salBruto: number, pensaoAlimenticia: number, dependentes: number) {
-    console.log(typeof dependentes);
+  async calcularIrNaFonte(IrFonte: IrFonteModel) {
+    console.log(typeof IrFonte.dependentes);
 
-    if (salBruto <= 0 || pensaoAlimenticia < 0 || dependentes < 0 || isNaN(salBruto) || isNaN(pensaoAlimenticia) ||
-      isNaN(dependentes) || isBoolean(dependentes) || isBoolean(salBruto) || isBoolean(pensaoAlimenticia)) {
+    if (IrFonte.salBruto <= 0 || IrFonte.pensaoAlimenticia < 0 || IrFonte.dependentes < 0 || isNaN(IrFonte.salBruto) || isNaN(IrFonte.pensaoAlimenticia) ||
+      isNaN(IrFonte.dependentes) || isBoolean(IrFonte.dependentes) || isBoolean(IrFonte.salBruto) || isBoolean(IrFonte.pensaoAlimenticia)) {
 
       throw Error;
     }
 
-    function calculoInss(salBruto) {
+    function calculoInss(IrFonte: IrFonteModel) {
       let valor = 0;
       let calculated = false;
 
-      if (salBruto <= 1100) {
-        valor += salBruto * 0.075;
+      if (IrFonte.salBruto <= 1100) {
+        valor += IrFonte.salBruto * 0.075;
         calculated = true;
       } else if (!calculated) {
         valor = 1100 * 0.075;
       }
 
-      if (salBruto <= 2203.48 && !calculated) {
-        valor += (salBruto - 1100.01) * 0.09;
+      if (IrFonte.salBruto <= 2203.48 && !calculated) {
+        valor += (IrFonte.salBruto - 1100.01) * 0.09;
         calculated = true;
       } else if (!calculated) {
         valor += (2203.48 - 1100.01) * 0.09;
       }
 
-      if (salBruto <= 3305.22 && !calculated) {
-        valor += (salBruto - 2203.49) * 0.12;
+      if (IrFonte.salBruto <= 3305.22 && !calculated) {
+        valor += (IrFonte.salBruto - 2203.49) * 0.12;
         calculated = true;
       } else if (!calculated) {
         valor += (3305.22 - 2203.49) * 0.12;
       }
 
-      if (salBruto <= 6433.57 && !calculated) {
-        valor += (salBruto - 3305.23) * 0.14;
+      if (IrFonte.salBruto <= 6433.57 && !calculated) {
+        valor += (IrFonte.salBruto - 3305.23) * 0.14;
         calculated = true;
       } else if (!calculated) {
         valor += (6433.57 - 3305.23) * 0.14;
@@ -44,9 +45,9 @@ class IrNaFonteService {
       return valor;
     }
 
-    const inss = calculoInss(salBruto);
+    const inss = calculoInss(IrFonte.salBruto[0]);
     const baseSalarial =
-      salBruto - inss - pensaoAlimenticia - dependentes * 189.59;
+      IrFonte.salBruto - inss - IrFonte.pensaoAlimenticia - IrFonte.dependentes * 189.59;
     let faixaSalarial = 0;
 
     if (baseSalarial <= 1903.98) {

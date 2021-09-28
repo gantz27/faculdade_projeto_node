@@ -13,7 +13,7 @@ class PisController {
       pis.qtdSalMin = qtdSalMin
       pis.monthsWorked = monthsWorked
 
-      const pisService = new PisService();
+      const pisService = new PisService
       pis = await pisService.calcularPis(pis)
 
       return res.send({ pis });
