@@ -1,13 +1,17 @@
 import { isBoolean } from "util";
+import { PisModel } from "../models/Pis"
 
 class PisService {
-  async calcularPis(monthsWorked: number) {
-    if (monthsWorked > 12 || monthsWorked <= 0 || isNaN(monthsWorked) || isBoolean(monthsWorked)) {
+  async calcularPis(pis: PisModel) {
+    if (pis.monthsWorked > 12 || pis.monthsWorked <= 0 || isNaN(pis.monthsWorked) || isBoolean(pis.monthsWorked)) {
       throw Error;
     }
-    if (monthsWorked >= 1 && monthsWorked <= 12) {
-      return monthsWorked * 92;
+    if (pis.qtdSalMin <= 2 && pis.qtdSalMin > 0 && pis.monthsWorked >= 1 && pis.monthsWorked <= 12) {
+      pis.resultadoImposto = pis.monthsWorked * 12
     }
+
+    return pis
+
   }
 }
 
