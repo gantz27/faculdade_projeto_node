@@ -1,4 +1,5 @@
 import { isBoolean } from "util";
+import { IrFonteEnumInss } from "../enums/IrFonteEnum";
 import { IrFonteModel } from "../models/IrFonte";
 
 class IrNaFonteService {
@@ -16,31 +17,31 @@ class IrNaFonteService {
       let calculated = false;
 
       if (IrFonte.salBruto <= 1100) {
-        valor += IrFonte.salBruto * 0.075;
+        valor += IrFonte.salBruto * IrFonteEnumInss.FIRST_PERCENT;
         calculated = true;
       } else if (!calculated) {
-        valor = 1100 * 0.075;
+        valor = 1100 * IrFonteEnumInss.FIRST_PERCENT;
       }
 
       if (IrFonte.salBruto <= 2203.48 && !calculated) {
-        valor += (IrFonte.salBruto - 1100.01) * 0.09;
+        valor += (IrFonte.salBruto - 1100.01) * IrFonteEnumInss.SECOND_PERCENT;
         calculated = true;
       } else if (!calculated) {
-        valor += (2203.48 - 1100.01) * 0.09;
+        valor += (2203.48 - 1100.01) * IrFonteEnumInss.SECOND_PERCENT;
       }
 
       if (IrFonte.salBruto <= 3305.22 && !calculated) {
-        valor += (IrFonte.salBruto - 2203.49) * 0.12;
+        valor += (IrFonte.salBruto - 2203.49) * IrFonteEnumInss.THIRD_PERCENT;
         calculated = true;
       } else if (!calculated) {
-        valor += (3305.22 - 2203.49) * 0.12;
+        valor += (3305.22 - 2203.49) * IrFonteEnumInss.THIRD_PERCENT;
       }
 
       if (IrFonte.salBruto <= 6433.57 && !calculated) {
-        valor += (IrFonte.salBruto - 3305.23) * 0.14;
+        valor += (IrFonte.salBruto - 3305.23) * IrFonteEnumInss.FOURTY_PERCENT;
         calculated = true;
       } else if (!calculated) {
-        valor += (6433.57 - 3305.23) * 0.14;
+        valor += (6433.57 - 3305.23) * IrFonteEnumInss.FOURTY_PERCENT;
       }
       return valor;
     }
