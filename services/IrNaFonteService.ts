@@ -1,5 +1,5 @@
 import { isBoolean } from "util";
-import { IrFonteEnumInss } from "../enums/IrFonteEnum";
+import { IrEnumPercent, IrFonteEnumDeducao, IrFonteEnumInss } from "../enums/IrFonteEnum";
 import { IrFonteModel } from "../models/IrFonte";
 
 class IrNaFonteService {
@@ -65,19 +65,19 @@ class IrNaFonteService {
 
     switch (faixaSalarial) {
       case (faixaSalarial = 0):
-        return baseSalarial * 0;
+        return baseSalarial * IrEnumPercent.ZERO_RANGE;
         break;
       case (faixaSalarial = 1):
-        return Number(baseSalarial * 0.075 - 142.8).toFixed(2);
+        return Number(baseSalarial * IrEnumPercent.FIRST_RANGE - IrFonteEnumDeducao.FIRST_DEDUCTION).toFixed(2);
         break;
       case (faixaSalarial = 2):
-        return Number(baseSalarial * 0.15 - 354.8).toFixed(2);
+        return Number(baseSalarial * IrEnumPercent.SECOND_RANGE - IrFonteEnumDeducao.SECOND_DEDUCTION).toFixed(2);
         break;
       case (faixaSalarial = 3):
-        return Number(baseSalarial * 0.225 - 636.13).toFixed(2);
+        return Number(baseSalarial * IrEnumPercent.THIRD_RANGE - IrFonteEnumDeducao.THIRD_DEDUCTION).toFixed(2);
         break;
       case (faixaSalarial = 4):
-        return Number(baseSalarial * 0.275 - 869.36).toFixed(2);
+        return Number(baseSalarial * IrEnumPercent.FOURTY_RANGE - IrFonteEnumDeducao.FOURTY_DEDUCTION).toFixed(2);
 
       default:
         console.log("Sorry, we are out of ${faixaSalarial}.");
