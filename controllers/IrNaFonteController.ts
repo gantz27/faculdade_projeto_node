@@ -15,10 +15,12 @@ class IrNaFonteController {
       IrFonte.pensaoAlimenticia = pensaoAlimenticia
       IrFonte.dependentes = dependentes
 
-      const irnafonteService = new IrNaFonteService
-      IrFonte = await irnafonteService.calcularIrNaFonte(IrFonte)
+      //let resultado = 0
 
-      return res.send({ IrFonte })
+      const irnafonteService = new IrNaFonteService
+      IrFonte.resultadoIrFonte = await irnafonteService.calcularIrNaFonte(IrFonte)
+
+      return res.send({ resultado : IrFonte.resultadoIrFonte })
     } catch (e) {
       res.status(400).json({ error: 'Algum dado inserido está inválido' })
     }
