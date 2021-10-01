@@ -17,6 +17,12 @@ export enum IrFonteEnumDeducao {
 
 }
 
+export enum IrFonteDep {
+
+    dependentes = 189.59
+
+}
+
 
 export enum IrEnumPercent {
 
