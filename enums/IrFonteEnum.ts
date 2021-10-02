@@ -1,5 +1,5 @@
 
-export enum IrFonteEnumInss {
+enum IrFonteEnumInss {
 
     FIRST_PERCENT = 0.075,
     SECOND_PERCENT = 0.09,
@@ -8,7 +8,7 @@ export enum IrFonteEnumInss {
 
 }
 
-export enum IrFonteEnumDeducao {
+enum IrFonteEnumDeducao {
 
     FIRST_DEDUCTION = 142.8,
     SECOND_DEDUCTION = 354.8,
@@ -17,14 +17,13 @@ export enum IrFonteEnumDeducao {
 
 }
 
-export enum IrFonteDep {
-
+enum IrDep {
     dependentes = 189.59
 
 }
 
 
-export enum IrEnumPercent {
+enum IrEnumPercent {
 
     ZERO_RANGE = 0,
     FIRST_RANGE = 0.075, 
@@ -34,3 +33,5 @@ export enum IrEnumPercent {
 
 
 }
+
+export { IrFonteEnumInss, IrFonteEnumDeducao, IrDep, IrEnumPercent }

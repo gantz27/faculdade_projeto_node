@@ -1,10 +1,9 @@
 import { isBoolean } from "util";
-import { IrEnumPercent, IrFonteDep, IrFonteEnumDeducao, IrFonteEnumInss } from "../enums/IrFonteEnum";
+import { IrEnumPercent, IrDep, IrFonteEnumDeducao, IrFonteEnumInss } from "../enums/IrFonteEnum";
 import { IrFonteModel } from "../models/IrFonte";
 
 class IrNaFonteService {
   async calcularIrNaFonte(IrFonte: IrFonteModel) {
-    console.log(typeof IrFonte.dependentes);
 
     if (IrFonte.salBruto <= 0 || IrFonte.pensaoAlimenticia < 0 || IrFonte.dependentes < 0 || isNaN(IrFonte.salBruto) || isNaN(IrFonte.pensaoAlimenticia) ||
       isNaN(IrFonte.dependentes) || isBoolean(IrFonte.dependentes) || isBoolean(IrFonte.salBruto) || isBoolean(IrFonte.pensaoAlimenticia)) {
@@ -47,9 +46,9 @@ class IrNaFonteService {
     }
 
     const inss = calculoInss(IrFonte);
-    const baseSalarial = IrFonte.salBruto - inss - IrFonte.pensaoAlimenticia - (IrFonte.dependentes * IrFonteDep.dependentes);
+    const baseSalarial = IrFonte.salBruto - inss - IrFonte.pensaoAlimenticia - (IrFonte.dependentes * IrDep.dependentes);
     //let faixaSalarial = 0;
-    IrFonte.inss = inss
+    IrFonte.inss = Number(inss.toFixed(2))
     
     if (baseSalarial <= 1903.98) {
       //faixaSalarial = 0;

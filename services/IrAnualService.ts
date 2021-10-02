@@ -1,74 +1,46 @@
 import { isBoolean, isString } from "util";
-
+import { IrAnualModel } from "../models/IrAnual";
+import { anual, taxasDeducaoAnual } from "../enums/IrAnualEnum"
+import { IrDep, IrEnumPercent } from "../enums/IrFonteEnum";
 class IrAnualService {
-
-    async calcularIrAnual(salBrutoAnual: number, irRetido: number, inss: number, dependentes: number) {
-
-        if(salBrutoAnual <= 0 || isNaN(salBrutoAnual) || isBoolean(salBrutoAnual)
-            || irRetido <= 0 || isNaN(irRetido) || isBoolean(irRetido)
-            || inss <= 0 || isNaN(inss) || isBoolean(inss)
-            || dependentes < 0 || isNaN(dependentes) || isBoolean(dependentes))
-        {
-            throw Error
-        }
-
-        
-        const baseCalculo = salBrutoAnual - irRetido - inss - ((dependentes * 189.59)*12);
-        var faixaSalarial = 0
-
-               
-        if (baseCalculo <= 22847.76) {
-            faixaSalarial = 0;
-        } else if (baseCalculo >= 22847.77 && baseCalculo <= 33919.80) {
-            faixaSalarial = 1;
-        } else if (baseCalculo >= 33919.81 && baseCalculo <= 45012.60) {
-            faixaSalarial = 2;
-        } else if (baseCalculo >= 45012.61 && baseCalculo <= 55976.16) {
-            faixaSalarial = 3;
-        } else {
-            faixaSalarial = 4;
-        }
-
-  
-
-        function aliquota() {
-            let alq
-            if (faixaSalarial == 0){
-                return(alq = "isento")
-            } else if (faixaSalarial == 1) {
-                return(alq = "7.5%")
-            } else if (faixaSalarial == 2) {
-                return (alq = "15%") 
-            } else if (faixaSalarial == 3) {
-                return(alq = "22.5%")
-            }else if (faixaSalarial == 4) {
-                return(alq = "27.5%")
-            }
-        }
-
-        switch (faixaSalarial) {
-            case (faixaSalarial = 0):
-                return [Number(baseCalculo * 0), aliquota()];
-                break;
-            case (faixaSalarial = 1):
-                return [Number(baseCalculo * 0.075 - 1713.58).toFixed(2), aliquota()];
-                break;
-            case (faixaSalarial = 2):
-                return [Number(baseCalculo * 0.15 - 4257.57).toFixed(2), aliquota()];
-                break;
-            case (faixaSalarial = 3):
-                return [Number(baseCalculo * 0.225 - 7633.51).toFixed(2), aliquota()];
-                break;
-            case (faixaSalarial = 4):
-                return [Number(baseCalculo * 0.275 - 10432.32).toFixed(2), aliquota()];
-            default:
-                console.log("Sorry, we are out of ${faixaSalarial}.");
-        }
-
+  async calcularIrAnual(IrAnual: IrAnualModel) {
+    if (
+      IrAnual.salBrutoAnual <= 0 || isNaN(IrAnual.salBrutoAnual) ||
+      isBoolean(IrAnual.salBrutoAnual) || IrAnual.irRetido <= 0 ||
+      isNaN(IrAnual.irRetido) || isBoolean(IrAnual.irRetido) ||
+      IrAnual.inss <= 0 || isNaN(IrAnual.inss) ||
+      isBoolean(IrAnual.inss) || IrAnual.dependentes < 0 ||
+      isNaN(IrAnual.dependentes) || isBoolean(IrAnual.dependentes)
+    ) {
+      throw Error;
     }
 
+    const baseCalculo = IrAnual.salBrutoAnual - IrAnual.irRetido - IrAnual.inss - IrAnual.dependentes * IrDep.dependentes * anual.meses;
+
+    if (baseCalculo <= 22847.76) {
+      IrAnual.aliquota =  "isento";
+      IrAnual.resultadoImpostoAnual = Number(baseCalculo * IrEnumPercent.ZERO_RANGE);
+    } else if (baseCalculo >= 22847.77 && baseCalculo <= 33919.8) {
+      IrAnual.aliquota =  "7.5%";
+      IrAnual.resultadoImpostoAnual = Number((baseCalculo * IrEnumPercent.FIRST_RANGE - taxasDeducaoAnual.taxaONE).toFixed(2)
+      );
+    } else if (baseCalculo >= 33919.81 && baseCalculo <= 45012.6) {
+
+      IrAnual.aliquota = "15%";
+      IrAnual.resultadoImpostoAnual = Number((baseCalculo * IrEnumPercent.SECOND_RANGE - taxasDeducaoAnual.taxaSECOND).toFixed(2)
+      );
+    } else if (baseCalculo >= 45012.61 && baseCalculo <= 55976.16) {
+      IrAnual.aliquota = "22.5%";
+      IrAnual.resultadoImpostoAnual = Number((baseCalculo * IrEnumPercent.THIRD_RANGE - taxasDeducaoAnual.taxaTHIRD).toFixed(2)
+      );
+    } else {
+      IrAnual.aliquota = "27.5%"
+      IrAnual.resultadoImpostoAnual = Number((baseCalculo * IrEnumPercent.FOURTY_RANGE - taxasDeducaoAnual.taxaFOURTY).toFixed(2)
+      );
+    }
+
+    return IrAnual.resultadoImpostoAnual;
+  }
 }
 
-
-
-export { IrAnualService } ;
+export { IrAnualService };
