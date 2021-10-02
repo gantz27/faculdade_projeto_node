@@ -1,17 +1,21 @@
 import { IrAnualService } from "../services/IrAnualService";
+import { IrAnualModel } from "../models/IrAnual";
 
 class IrAnualController {
   async calcularIrAnual(req, res) {
     const { salBrutoAnual, irRetido, inss, dependentes } = req.body;
 
-    const iranualService = new IrAnualService();
     try {
-      const receberValorDaFuncao = await iranualService.calcularIrAnual(salBrutoAnual, irRetido, inss, dependentes);
+      let IrAnual = new IrAnualModel();
+      IrAnual.salBrutoAnual = salBrutoAnual;
+      IrAnual.irRetido = irRetido;
+      IrAnual.inss = inss;
+      IrAnual.dependentes = dependentes;
+      
+      const iranualservice = new IrAnualService();
+      IrAnual.resultadoImpostoAnual = await iranualservice.calcularIrAnual(IrAnual);
 
-      const aliquota = receberValorDaFuncao[1];
-      const resultado = receberValorDaFuncao[0];
-
-      return res.send({ resultado, aliquota });
+      return res.send({ resultado: IrAnual.resultadoImpostoAnual, aliquota: IrAnual.aliquota });
     } catch (e) {
       res.status(400).json({ error: "Algum dado inserido está inválido !" });
     }

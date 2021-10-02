@@ -14,11 +14,11 @@ class PisController {
       pis.monthsWorked = monthsWorked
 
       const pisService = new PisService
-      pis = await pisService.calcularPis(pis)
+      pis.resultadoImposto = await pisService.calcularPis(pis)
 
-      return res.send({ pis });
+      return res.send({ Resultado: pis.resultadoImposto });
     } catch (e) {
-      res.status(400).json({ error: "Escreva o número do mês válido (1 - 12)" });
+      res.status(400).json({ error: "Escreva um número mês válido ou quantidade de sálarios excedente" });
     }
   }
 }
