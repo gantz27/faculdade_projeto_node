@@ -47,47 +47,21 @@ class IrNaFonteService {
 
     const inss = calculoInss(IrFonte);
     const baseSalarial = IrFonte.salBruto - inss - IrFonte.pensaoAlimenticia - (IrFonte.dependentes * IrDep.dependentes);
-    //let faixaSalarial = 0;
     IrFonte.inss = Number(inss.toFixed(2))
     
     if (baseSalarial <= 1903.98) {
-      //faixaSalarial = 0;
       IrFonte.resultadoIrFonte = baseSalarial * IrEnumPercent.ZERO_RANGE;
     } else if (baseSalarial >= 1903.99 && baseSalarial <= 2826.65) {
-      //faixaSalarial = 1;
       IrFonte.resultadoIrFonte = baseSalarial * IrEnumPercent.FIRST_RANGE - Number(IrFonteEnumDeducao.FIRST_DEDUCTION.toFixed(2));
     } else if (baseSalarial >= 2826.66 && baseSalarial <= 3751.05) {
-      //faixaSalarial = 2;
       IrFonte.resultadoIrFonte = baseSalarial * IrEnumPercent.SECOND_RANGE - Number(IrFonteEnumDeducao.SECOND_DEDUCTION.toFixed(2));
     } else if (baseSalarial >= 3751.06 && baseSalarial <= 4664.68) {
-      //faixaSalarial = 3;
       IrFonte.resultadoIrFonte = baseSalarial * IrEnumPercent.THIRD_RANGE - Number(IrFonteEnumDeducao.THIRD_DEDUCTION.toFixed(2));
     } else {
-      //faixaSalarial = 4;
       IrFonte.resultadoIrFonte = baseSalarial * IrEnumPercent.FOURTY_RANGE - Number(IrFonteEnumDeducao.FOURTY_DEDUCTION.toFixed(2));
     }
 
     return Number(IrFonte.resultadoIrFonte.toFixed(2));
-
-    /*switch (faixaSalarial) {
-      case (faixaSalarial = 0):
-        return baseSalarial * IrEnumPercent.ZERO_RANGE;
-        break;
-      case (faixaSalarial = 1):
-        return Number(baseSalarial * IrEnumPercent.FIRST_RANGE - IrFonteEnumDeducao.FIRST_DEDUCTION).toFixed(2);
-        break;
-      case (faixaSalarial = 2):
-        return Number(baseSalarial * IrEnumPercent.SECOND_RANGE - IrFonteEnumDeducao.SECOND_DEDUCTION).toFixed(2);
-        break;
-      case (faixaSalarial = 3):
-        return Number(baseSalarial * IrEnumPercent.THIRD_RANGE - IrFonteEnumDeducao.THIRD_DEDUCTION).toFixed(2);
-        break;
-      case (faixaSalarial = 4):
-        return Number(baseSalarial * IrEnumPercent.FOURTY_RANGE - IrFonteEnumDeducao.FOURTY_DEDUCTION).toFixed(2);
-
-      default:
-        console.log("Sorry, we are out of ${faixaSalarial}.");
-    }*/
   }
 }
 

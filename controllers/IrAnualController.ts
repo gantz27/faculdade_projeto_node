@@ -15,7 +15,7 @@ class IrAnualController {
       const iranualservice = new IrAnualService();
       IrAnual.resultadoImpostoAnual = await iranualservice.calcularIrAnual(IrAnual);
 
-      return res.send({ resultado: IrAnual.resultadoImpostoAnual, aliquota: IrAnual.aliquota });
+      return res.send({ IrAnual });
     } catch (e) {
       res.status(400).json({ error: "Algum dado inserido está inválido !" });
     }
