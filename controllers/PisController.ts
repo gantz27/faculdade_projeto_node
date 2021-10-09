@@ -5,12 +5,11 @@ class PisController {
 
   async calcular(req, res) {
     
-    const { qtdSalMin, monthsWorked } = req.body;
+    const { monthsWorked } = req.body;
 
     try {
      
       let pis = new PisModel();
-      pis.qtdSalMin = qtdSalMin
       pis.monthsWorked = monthsWorked
 
       const pisService = new PisService
@@ -18,7 +17,7 @@ class PisController {
 
       return res.send({ Resultado: pis.resultadoImposto });
     } catch (e) {
-      res.status(400).json({ error: "Escreva um número mês válido ou quantidade de sálarios excedente" });
+      res.status(400).json({ error: "Escreva um número mês válido !" });
     }
   }
 }

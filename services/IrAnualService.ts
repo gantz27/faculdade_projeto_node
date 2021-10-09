@@ -4,13 +4,9 @@ import { anual, taxasDeducaoAnual } from "../enums/IrAnualEnum"
 import { IrDep, IrEnumPercent } from "../enums/IrFonteEnum";
 class IrAnualService {
   async calcularIrAnual(IrAnual: IrAnualModel) {
-    if (
-      IrAnual.salBrutoAnual <= 0 || isNaN(IrAnual.salBrutoAnual) ||
-      isBoolean(IrAnual.salBrutoAnual) || IrAnual.irRetido <= 0 ||
-      isNaN(IrAnual.irRetido) || isBoolean(IrAnual.irRetido) ||
-      IrAnual.inss <= 0 || isNaN(IrAnual.inss) ||
-      isBoolean(IrAnual.inss) || IrAnual.dependentes < 0 ||
-      isNaN(IrAnual.dependentes) || isBoolean(IrAnual.dependentes)
+    if (IrAnual.salBrutoAnual <= 0 || isNaN(IrAnual.salBrutoAnual) || isBoolean(IrAnual.salBrutoAnual) || IrAnual.irRetido <= 0 ||
+      isNaN(IrAnual.irRetido) || isBoolean(IrAnual.irRetido) || IrAnual.inss <= 0 || isNaN(IrAnual.inss) ||
+      isBoolean(IrAnual.inss) || IrAnual.dependentes < 0 || isNaN(IrAnual.dependentes) || isBoolean(IrAnual.dependentes)
     ) {
       throw Error;
     }
